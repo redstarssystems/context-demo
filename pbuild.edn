@@ -1,0 +1,30 @@
+{
+ ;;:java-src-folder "java-src"
+ ;;:javac-options     ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
+
+ :warn-on-resource-conflicts? false
+
+ :deploy-signed?              true
+ :deploy-repo                 {:id "clojars" :url "https://clojars.org/repo"}
+ :deploy-creds                :m2-settings                  ;; :m2-settings or :password-prompt
+
+ :target-folder               "target"
+ :group-id                    "my.example"
+ :artifact-id                 "ctxdemo"
+ :artifact-version            "0.1.0-SNAPSHOT"
+
+ :main                        "my.example.ctxdemo.core"
+ :omit-source?                true
+ ;;:uberjar-filename            "ctxdemo.jar"
+
+ :description                 "FIXME: Put your application description here"
+ :url                         "FIXME: https://github.com/add-your-repo"
+ :scm                         {:url "FIXME: https://github.com/add-your-repo"}
+ :license                     {:name "EPL-2.0"
+                               :url  "https://www.eclipse.org/legal/epl-2.0/"}
+ :excluded-libs               #{}                           ;; e.g #{ org.clojure/clojure my.org/lib01}
+ ;;:standalone-run-script       "./my-custom-script.sh"
+ :manifest                    {"Multi-Release" "true"}      ;; log4j2 requires Multi-Release jar file for JDK9+
+ ;; :jlink-options is used when building standalone bundle
+ ;; :jlink-options               ["--strip-debug" "--no-man-pages" "--no-header-files" "--compress=2" "--add-modules" "java.sql"]
+ }

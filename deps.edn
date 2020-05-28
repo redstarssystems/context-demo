@@ -1,0 +1,95 @@
+{
+ :mvn/repos {"clojars" {:url "https://repo.clojars.org/"}
+             "central" {:url "https://repo1.maven.org/maven2/"}}
+
+ :paths     ["src" "resources" "target/classes" "java-src"]
+
+ :deps      {org.clojure/clojure                       {:mvn/version "1.10.2-alpha1"}
+             org.clojure/test.check                    {:mvn/version "1.0.0"}
+
+             ;; web server
+             ring/ring                                 {:mvn/version "1.8.0"}
+             info.sunng/ring-jetty9-adapter            {:mvn/version "0.12.8"}
+
+             ;; server side html generation
+             hiccup                                    {:mvn/version "1.0.5"}
+
+             ;; database connection pool
+             hikari-cp                                 {:mvn/version "2.11.0"}
+             ;; PG driver with async request and user types
+             com.impossibl.pgjdbc-ng/pgjdbc-ng         {:mvn/version "0.8.4"}
+             ;; standard PG driver
+             org.postgresql/postgresql                 {:mvn/version "42.2.12"}
+             ;; a new low-level Clojure wrapper for JDBC-based access to databases
+             seancorfield/next.jdbc                    {:mvn/version "1.0.424"}
+
+             ;; transport
+             com.cognitect/transit-clj                 {:mvn/version "1.0.324"}
+
+             ;; json support
+             metosin/jsonista                          {:mvn/version "0.2.6"}
+
+             ;;  fast http format negotiation, encoding and decoding
+             metosin/muuntaja                          {:mvn/version "0.6.7"}
+
+             ;; router
+             metosin/reitit                            {:mvn/version "0.4.2"}
+
+             ;; environment variables
+             environ                                   {:mvn/version "1.2.0"}
+
+             ;; detect ip network for monitoring
+             com.github.seancfoley/ipaddress           {:mvn/version "5.2.1"}
+
+             ;; state management
+             org.rssys/context                         {:mvn/version "0.1.1"}
+             mount                                     {:mvn/version "0.1.16"}
+
+             ;; utils
+             org.rssys/util                            {:mvn/version "0.1.1"}
+
+             ;; metrics, logging
+             org.apache.logging.log4j/log4j-core       {:mvn/version "2.13.1"}
+             org.apache.logging.log4j/log4j-slf4j-impl {:mvn/version "2.13.1"}
+             org.rssys/metrics                         {:mvn/version "0.1.0"
+                                                        :exclusions  [org.slf4j/slf4j-simple
+                                                                      com.google.code.findbugs/annotations]}
+
+             ;; support java 11+
+             org.clojure/core.rrb-vector               {:mvn/version "0.1.1"}}
+
+ :aliases   {
+             :run      {:extra-paths ["resources"]
+                        :jvm-opts    ["-DLOG4J_CONFIGURATION_FILE=resources/log4j2.xml"
+                                      "-XX:+HeapDumpOnOutOfMemoryError" "-XX:HeapDumpPath=./"]
+                        :main-opts   ["--main" "my.example.ctxdemo.core"]}
+
+             :repl     {:extra-deps  {nrepl                       {:mvn/version "0.7.0"}
+                                      healthsamurai/matcho        {:mvn/version "0.3.7"}
+                                      clj-deps                    {:mvn/version "0.4.10"}
+                                      philoskim/debux             {:mvn/version "0.6.5"}
+                                      criterium                   {:mvn/version "0.4.5"}
+                                      hashp                       {:mvn/version "0.1.1"}
+                                      org.clojure/tools.namespace {:mvn/version "1.0.0"}}
+                        :jvm-opts    [
+                                      ;; uncomment this if you want to debug in IntelliJ IDEA
+                                      ;;"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+                                      ]
+                        :extra-paths ["dev/src" "resources" "test"]
+                        :main-opts   ["--main" "nrepl.cmdline"]}
+
+             :pbuilder {:extra-deps  {org.rssys/pbuilder {:mvn/version "0.1.11" :exclusions [org.slf4j/slf4j-simple]}}
+                        :extra-paths ["resources"]
+                        :jvm-opts    []
+                        :main-opts   ["--main" "org.rssys.pbuilder.core"]}
+
+             :test     {:extra-deps  {lambdaisland/kaocha           {:mvn/version "1.0.632"}
+                                      lambdaisland/kaocha-cloverage {:mvn/version "1.0-45"}
+                                      healthsamurai/matcho          {:mvn/version "0.3.7"}}
+                        :extra-paths ["resources" "test" "test/resources"]
+                        :jvm-opts    [;;"-DLOG4J_CONFIGURATION_FILE=test/resources/log4j2-test.xml"
+                                      ]
+                        :main-opts   ["--main" "kaocha.runner"]}
+
+             }
+ }

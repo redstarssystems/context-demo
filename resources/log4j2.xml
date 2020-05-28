@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Don't forget to set system property -Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+ to make all loggers asynchronous. -->
+<Configuration monitorInterval="30">
+    <properties>
+        <property name="app-name">my.example.ctxdemo</property>
+        <property name="pattern-simple">%d{HH:mm:ss.SSS} %-5level - %msg %logger{36}%n</property>
+        <property name="pattern-edn">{:time #inst "%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}", :msg %msg, :host "${hostName}", :level "%level", :logger "%logger{36}"}%n</property>
+        <property name="pattern-edn-short">{:t #inst"%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}" :l "%level", :m %msg :s "%logger{36}"}%n</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>${pattern-edn-short}</pattern>
+            </PatternLayout>
+        </Console>
+
+<!--        <RollingFile name="RollingFile" fileName="log/${app-name}.log" filePattern="log/${app-name}-%d{yyyy-MM-dd}-%i.log.gz">-->
+<!--            <PatternLayout>-->
+<!--                <pattern>${pattern-edn}</pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy />&lt;!&ndash; Rotated everyday &ndash;&gt;-->
+<!--                <SizeBasedTriggeringPolicy size="100 MB"/> &lt;!&ndash; Or every 100 MB &ndash;&gt;-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="4" compressionLevel="9"/>-->
+<!--        </RollingFile>-->
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="my.example.ctxdemo" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="io.pedestal.log" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!--        <Logger name="my.example.ctxdemo" level="debug" additivity="false">-->
+        <!--            <AppenderRef ref="RollingFile"/>-->
+        <!--        </Logger>-->
+
+        <Root level="warn">
+            <AppenderRef ref="Console"/>
+            <!--            <AppenderRef ref="RollingFile"/>-->
+        </Root>
+
+    </Loggers>
+
+</Configuration>

@@ -1,0 +1,42 @@
+== ctxdemo
+
+Demo project for context library.
+
+Project ctxdemo generated from web template https://github.com/redstarssystems/web-template.git.
+
+Use `direnv` utility to load .env file.
+`make repl` -  to run REPL
+`make run` - to run app
+
+
+== Project commands
+
+In order to run project commands use Makefile (make utility). Run `make help` for additional info.
+List of available commands:
+
+* run           - run project
+* repl          - run REPL
+* clean         - clear target folder
+* javac         - compile java sources
+* compile       - compile clojure code
+* jar           - build jar file (as library)
+* uberjar       - build executable jar file with all dependencies (uberjar)
+* install       - install jar file (library) to local .m2
+* deploy        - deploy jar file (library) to clojars.org
+* conflicts     - show class conflicts (same name class in multiple jar files)
+* standalone    - create standalone executable bundle with custom JDK 9+
+* release       - release artifact. To release artifact run `clojure -A:pbuild release`.
+* bump          - bump version artifact in build file. E.g: `clojure -A:pbuilder bump beta`. Parameter should be
+one of: major, minor, patch, alpha, beta, rc, qualifier
+
+== Tests
+
+To run tests use `clojure -A:test` or `make test`. Additional optional parameter may be :unit or :integration
+e.g. `clojure -A:test :unit` or `make test :integration`.
+
+
+## License
+
+Copyright © 2020 mike
+
+Distributed under the Eclipse Public License 2.0 or (at your option) any later version.
